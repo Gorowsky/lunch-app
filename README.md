@@ -1,5 +1,9 @@
 # LunchApp
 
+## Install all dependencies first
+
+`npm install`
+
 ## Project specific commands:
 ### Development server with json-server
 
