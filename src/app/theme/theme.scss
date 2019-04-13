@@ -1,0 +1,82 @@
+@import "./fonts/fonts.scss";
+@import '~@angular/material/theming';
+
+$fontFamily: 'Roboto';
+$fontSize: 10px !default;
+
+@function rem($multiplier) {
+  @return $multiplier * $fontSize;
+}
+
+$display-4: rem(11.20) !default;
+$display-3: rem(5.600) !default;
+$display-2: rem(4.500) !default;
+$display-1: rem(3.400) !default;
+$headline:  rem(2.400) !default;
+$title:     rem(2.000) !default;
+$subhead:   rem(1.600) !default;
+$body:      rem(1.400) !default;
+$caption:   rem(1.200) !default;
+
+$typography: mat-typography-config(
+  $font-family: $fontFamily + ', sans-serif',
+  $display-4:    mat-typography-level($display-4, $display-4 * 1.2, 400),
+  $display-3:    mat-typography-level($display-3, $display-3 * 1.2, 400),
+  $display-2:    mat-typography-level($display-2, $display-2 * 1.2, 400),
+  $display-1:    mat-typography-level($display-1, $display-1 * 1.2, 400),
+  $headline:     mat-typography-level($headline, $headline * 1.2, 500),
+  $title:        mat-typography-level($title, $title * 1.2, 500),
+  $caption:      mat-typography-level($caption, $caption * 1.2, 500),
+  $subheading-1: mat-typography-level($subhead, $subhead * 1.2, 400),
+  $body-1:       mat-typography-level($body, $body * 1.2, 400),
+  $body-2:       mat-typography-level($body, $body * 1.2, 400)
+);
+
+@include mat-core($typography);
+
+// Define the default theme (same as the example above).
+$candy-app-primary: mat-palette($mat-indigo);
+$candy-app-accent:  mat-palette($mat-pink, A200, A100, A400);
+$candy-app-theme:   mat-light-theme($candy-app-primary, $candy-app-accent);
+
+// Include the default theme styles.
+@include angular-material-theme($candy-app-theme);
+
+// Define an alternate dark theme.
+$dark-primary: mat-palette($mat-blue-grey);
+$dark-accent:  mat-palette($mat-amber, A200, A100, A400);
+$dark-warn:    mat-palette($mat-deep-orange);
+$dark-theme:   mat-dark-theme($dark-primary, $dark-accent, $dark-warn);
+
+.dark-theme {
+  @include angular-material-theme($dark-theme);
+};
+
+html, body {
+  font-family: $fontFamily, sans-serif;
+  font-size: $body;
+
+  h1 {
+    @extend .mat-h1;
+  }
+
+  h2 {
+    @extend .mat-h2;
+  }
+
+  h3 {
+    @extend .mat-h3;
+  }
+
+  h4 {
+    @extend .mat-h4;
+  }
+
+  h5 {
+    @extend .mat-h5;
+  }
+
+  h6 {
+    @extend .mat-h6;
+  }
+}

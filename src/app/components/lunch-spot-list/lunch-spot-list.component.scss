@@ -1,0 +1,29 @@
+@import '../../theme/colors.scss';
+
+:host {
+  .lunch-spot {
+    &-li {
+      border-width: 1px;
+      border-style: solid;
+      box-sizing: border-box;
+      margin-bottom: 8px;
+      position: relative;
+
+      &.delivered {
+        background-color: $li-bg-delivered;
+        border-color: $li-border-color-delivered;
+      }
+
+      &.in-delivery {
+        background-color: $li-bg-in-delivery;
+        border-color: $li-border-color-in-delivery;
+      }
+
+      &-date {
+        position: absolute;
+        top: 20px;
+        right: 10px;
+      }
+    }
+  }
+}

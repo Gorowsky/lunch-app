@@ -1,0 +1,10 @@
+<mat-list class="lunch-spot">
+  <mat-list-item *ngFor="let lunchSpot of lunchSpots"
+    [ngClass]="mapToLunchStatusClass(lunchSpot.status)"
+    class="lunch-spot-li">
+    <h4 mat-line>{{lunchSpot.company}}</h4>
+    <p mat-line>{{lunchSpot.address}}</p>
+    <p mat-line>Lunching spot: {{lunchSpot.name}}</p>
+    <span class="lunch-spot-li-date">Dostawa: {{lunchSpot.deliveryTime}}</span>
+  </mat-list-item>
+</mat-list>

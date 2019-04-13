@@ -1,0 +1,25 @@
+:host {
+  display: flex;
+  flex: 1;
+  flex-flow: column;
+  
+  /deep/ {
+    > .flex-adjust-height {
+      flex: 1;
+      overflow: auto;
+    }
+  }
+
+  .nav-bar-link {
+    flex: 1;
+    opacity: 1;
+
+    &-icon {
+      margin-right: 10px;
+    }
+    
+    &-label {
+      color: white;
+    }
+  }
+}
