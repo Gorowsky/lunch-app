@@ -7,7 +7,7 @@ import LunchStatus = LunchSpot.Status;
 @Component({
   selector: 'app-lunch-spots-in-delivery',
   templateUrl: './lunch-spots-in-delivery.component.html',
-  host: { 'class': 'flex-adjust-height' }
+  styleUrls: ['../../theme/lunch-spots.scss']
 })
 export class LunchSpotsInDeliveryComponent implements OnInit {
 

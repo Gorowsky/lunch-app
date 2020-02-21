@@ -9,10 +9,11 @@ import LunchStatus = LunchSpot.Status;
 })
 export class LunchSpotListComponent {
 
-  @Input() lunchSpots: Array<LunchSpot.Single>
+  @Input() lunchSpots: Array<LunchSpot.Single>;
+
   private lunchStatusMap: Map<string, LunchStatus> = new Map()
-    .set(LunchStatus.DELIVERED, "delivered")
-    .set(LunchStatus.UNDELIVERED, "in-delivery");
+    .set(LunchStatus.DELIVERED, 'delivered')
+    .set(LunchStatus.UNDELIVERED, 'in-delivery');
 
   constructor() { }
 
