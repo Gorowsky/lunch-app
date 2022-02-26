@@ -1,0 +1,1 @@
+{"ast":null,"code":"export var LunchSpot;\n\n(function (LunchSpot) {\n  let Status;\n\n  (function (Status) {\n    Status[\"UNDELIVERED\"] = \"UNDELIVERED\";\n    Status[\"DELIVERED\"] = \"DELIVERED\";\n  })(Status = LunchSpot.Status || (LunchSpot.Status = {}));\n})(LunchSpot || (LunchSpot = {}));","map":null,"metadata":{},"sourceType":"module"}

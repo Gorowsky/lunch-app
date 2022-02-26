@@ -1,8 +1,7 @@
 import { Injectable } from "@angular/core";
-import { Observable, of } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { LunchSpot } from '../model/lunch-spots';
-import { LocalStorageService } from 'angular-2-local-storage';
 import { tap } from 'rxjs/operators';
 
 /**
@@ -12,32 +11,26 @@ import { tap } from 'rxjs/operators';
 @Injectable()
 export class LunchApiService {
 
-  private STORAGE_PREFIX = "lunch-api"
   private PORT: string = "8081"
   private HOST: string = "localhost"
   private LUNCH_API_ROOT: string = `http://${this.HOST}:${this.PORT}`
+  private lunchSpots$: BehaviorSubject<LunchSpot.Model> = new BehaviorSubject(undefined);
 
   constructor(
     private http: HttpClient,
-    private storageService: LocalStorageService
   ) {}
 
-  private fromStorage(caller: string, stream: Observable<any>): Observable<any> {
-    const data = this.storageService.get(`${this.STORAGE_PREFIX}-${caller}`);
+  getLunchSpots(): Observable<LunchSpot.Model> {
+    const lunchSpots = this.lunchSpots$.getValue();
 
-    if (!data) {
-      return stream
-        .pipe(tap(data => this.storageService.set(`${this.STORAGE_PREFIX}-${caller}`, data)));
+    if (!lunchSpots) {
+      return this.http
+        .get<LunchSpot.Model>(`${this.LUNCH_API_ROOT}/lunch-spots`)
+        .pipe(
+          tap(lunchSpots => this.lunchSpots$.next(lunchSpots))
+        );
     }
 
-    return of(data);
+    return of(lunchSpots);
   }
-
-  getLunchSpots(): Observable<LunchSpot.Model> {
-    return this.fromStorage(
-      "getLunchSpots",
-      this.http.get<LunchSpot.Model>(`${this.LUNCH_API_ROOT}/lunch-spots`)
-    );
-  }
-
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { LunchSpot } from 'src/app/model/lunch-spots';
 import { LunchApiService } from 'src/app/services/lunch-api.service';
-import { map } from 'rxjs/operators';
+import { map, tap } from 'rxjs/operators';
 import LunchStatus = LunchSpot.Status;
 
 @Component({
@@ -19,11 +19,14 @@ export class LunchSpotsInDeliveryComponent implements OnInit {
 
   ngOnInit() {
     this.lunchApiService.getLunchSpots()
-      .pipe(map(lunchSpotsData => lunchSpotsData.lunchSpots))
-      .subscribe(lunchSpots => {
-        this.lunchSpots = lunchSpots
-          .filter(lunchSpot => lunchSpot.status === LunchStatus.UNDELIVERED)
-      });
+      .pipe(
+        map(({ lunchSpots }) => lunchSpots),
+        tap(lunchSpots => {
+          this.lunchSpots = lunchSpots
+            .filter(({ status }) => status === LunchStatus.UNDELIVERED);
+        })
+      )
+      .subscribe();
   }
 
 }
